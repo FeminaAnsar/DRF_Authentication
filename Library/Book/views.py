@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from .pagination import CustomPagination
+
 
 
 class RegisterView(APIView):
@@ -39,10 +40,11 @@ class BookList(generics.ListAPIView):
     serializer_class = BookSerializer
     pagination_class = CustomPagination
 
+
 class BookDetail(generics.RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    lookup_field = 'id'
+    permission_classes = [AllowAny]
 
 
 class BookUpdate(generics.UpdateAPIView):

@@ -23,8 +23,8 @@ urlpatterns = [
     path('register',views.RegisterView.as_view(),name="register"),
     path('', views.BookList.as_view(),name="book-list"),
     path('create',views.BookCreateList.as_view(),name="create"),
-    path('<int:pk>',views.BookUpdate.as_view(),name="book-update"),
-    path('<int:pk>',views.BookDelete.as_view(),name="book-delete"),
-    path('<int:pk>',views.BookDetail.as_view(),name="book-detail"),
+    path('update/<int:pk>',views.BookUpdate.as_view(),name="book-update"),
+    path('delete/<int:pk>',views.BookDelete.as_view(),name="book-delete"),
+    path('detail/<int:pk>',views.BookDetail.as_view(),name="book-detail"),
 
 ]
