@@ -39,7 +39,13 @@ class BookList(generics.ListAPIView):
     serializer_class = BookSerializer
     pagination_class = CustomPagination
 
-class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+class BookDetail(generics.RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    lookup_field = 'id'
+
+
+class BookUpdate(generics.UpdateAPIView):
     queryset=Book.objects.all()
     serializer_class = BookSerializer
     authentication_classes = [TokenAuthentication]
@@ -62,6 +68,12 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
             return super().put(request, *args, **kwargs)
         except Exception as e:
             return Response({'error': str(e)})
+
+class BookDelete(generics.DestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def delete(self,request,*args,**kwargs):
         try:
